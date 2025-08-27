@@ -34,8 +34,8 @@ class EmbeddingClient:
 				raise ValueError("Hugging Face API token is required for EMBEDDING_PROVIDER=hf")
 			try:
 				self.client = InferenceClient(
-					provider="hf-inference",
-					api_key=self.api_key,
+					model=self.model,
+					token=self.api_key,
 				)
 				logger.info(f"Initialized HF Inference client with model: {self.model}")
 			except Exception as e:
@@ -67,10 +67,7 @@ class EmbeddingClient:
 		embeddings: List[List[float]] = []
 		for txt in texts:
 			try:
-				result = self.client.feature_extraction(
-					txt,
-					model=self.model,
-				)
+				result = self.client.feature_extraction(txt)
 				if hasattr(result, 'tolist'):
 					result = result.tolist()
 				if isinstance(result, list) and all(isinstance(x, (int, float)) for x in result):
