@@ -1,0 +1,341 @@
+.chatContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.messagesContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1rem 6rem 1rem; /* bottom padding so last message visible above input */
+}
+
+.messagesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto; /* center horizontally */
+  min-height: 100%; /* fill container height so emptyState can center */
+}
+
+.emptyState {
+  margin: auto; /* centers vertically & horizontally inside flex column */
+  text-align: center;
+  color: var(--color-text-light);
+  animation: fadeInUp 0.4s ease forwards;
+}
+.emptyStateIcon {
+  background: var(--color-primary-light);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+  box-shadow: var(--shadow-md);
+}
+.emptyStateTitle { font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem 0; }
+.emptyStateDescription { font-size: 0.875rem; margin: 0; }
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.messageContainer.user { align-items: flex-end; }
+.messageContainer.assistant { align-items: flex-start; }
+
+.messageContent {
+  max-width: 90%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+.messageContent.user {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(37,99,235,0.35);
+}
+.messageContent.assistant {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.messageTimestamp {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin: 0 auto;
+}
+.loadingDots {
+  display: flex;
+  gap: 4px;
+}
+.loadingDot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-text-light);
+  border-radius: 50%;
+  animation: blink 1s infinite ease-in-out;
+}
+.loadingDot:nth-child(2) { animation-delay: 0.2s; }
+.loadingDot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%,80%,100% {opacity: 0;} 40% {opacity: 1;} }
+
+/* Input Area */
+.inputArea {
+  position: sticky;
+  bottom: 0;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-surface-2);
+  backdrop-filter: blur(6px);
+}
+
+.inputWrapper {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-surface-2);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  /* Glassmorphism styling */
+  background: rgba(255, 255, 255, 0.15); /* light fallback */
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  /* Darker, higher-contrast border */
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  /* Richer shadow for depth */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.fileUploadButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light);
+  transition: color var(--transition-fast);
+}
+.fileUploadButton:hover { color: var(--color-primary-light); }
+
+/* Hide the native file input, use icon button instead */
+.fileInput {
+  display: none;
+}
+
+/* Textarea wrapper fills remaining space */
+.textAreaContainer {
+  flex: 1;
+  display: flex;
+  /* Remove any borders or outlines that might show as blue bars */
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.textAreaContainer:focus,
+.textAreaContainer:focus-within {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.messageTextarea {
+  width: 100%; /* ensure full width */
+}
+
+.messageTextarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  outline: none;
+  max-height: 160px;
+  /* Remove all possible blue highlights and borders */
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.messageTextarea:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.messageTextarea:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto; /* push to far right */
+  color: var(--color-primary-light);
+  transition: transform var(--transition-fast);
+  outline: none; /* Remove blue outline */
+  border: none; /* Remove any border */
+  background: none; /* Remove any background */
+  box-shadow: none; /* Remove any box shadow */
+  border-radius: 0; /* Remove border radius that might show as a bar */
+}
+.sendButton:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+.sendButton:disabled { opacity: 0.5; cursor: not-allowed; }
+.sendButton:not(:disabled):hover { transform: translateY(-1px); }
+
+/* Remove any pseudo-elements that might create bars */
+.sendButton::before,
+.sendButton::after {
+  display: none;
+}
+
+/* Hide potential blue bar elements */
+.inputContainer::before,
+.inputContainer::after {
+  display: none;
+}
+
+.inputArea::before,
+.inputArea::after {
+  display: none;
+}
+
+/* Hide any divider elements that might be blue bars */
+.divider,
+.separator,
+.input-divider,
+.blue-bar {
+  display: none !important;
+}
+
+/* Remove borders that might appear as blue bars */
+.inputContainer > *:not(.messageTextarea):not(.sendButton):not(.fileUploadButton) {
+  border: none !important;
+  background: transparent !important;
+}
+
+.uploadProgress {
+  width: 100%;
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.uploadProgressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  transition: width 0.2s ease;
+}
+
+.uploadProgressContainer {
+  width: 100%;
+  margin-bottom: 1rem;
+  background: var(--color-surface-1);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.uploadProgressItem {
+  margin-bottom: 12px;
+}
+
+.uploadProgressItem:last-child {
+  margin-bottom: 0;
+}
+
+.uploadProgressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.uploadFileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.uploadStatus {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: capitalize;
+}
+
+.uploadProgressBar {
+  width: 100%;
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.uploadProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  transition: width 0.3s ease;
+  border-radius: 4px;
+}
+
+.uploadError {
+  font-size: 12px;
+  color: var(--color-error);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Error Boundary */
+.errorBoundary {
+  text-align: center;
+  padding: 2rem;
+}
+.refreshButton {
+  margin-top: 1rem;
+  @extend .btn-primary; /* can't extend, so replicate */
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: background var(--transition-fast);
+}
+.refreshButton:hover { background: var(--color-primary-dark); }
