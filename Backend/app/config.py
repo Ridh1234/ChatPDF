@@ -44,7 +44,7 @@ class Settings:
     )
 
     # Embedding Provider Settings
-    EMBEDDING_PROVIDER = get_env_var("EMBEDDING_PROVIDER", "local")  # "local" or "hf"
+    EMBEDDING_PROVIDER = get_env_var("EMBEDDING_PROVIDER", "hf")  # "local" or "hf"
     EMBEDDING_BATCH_SIZE = int(get_env_var("EMBEDDING_BATCH_SIZE", "64"))
 
     # RAG/Chat Settings

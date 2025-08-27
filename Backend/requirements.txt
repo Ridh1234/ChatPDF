@@ -27,7 +27,6 @@ langchain==0.2.10
 langchain-community==0.2.9
 langchain-openai==0.1.7
 chromadb==0.5.3
-sentence-transformers==3.0.1
 huggingface_hub==0.24.6
 
 # --- Logging & Monitoring ---
