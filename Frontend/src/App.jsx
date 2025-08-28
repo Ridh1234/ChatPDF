@@ -8,7 +8,7 @@ import styles from './styles/App.module.css';
 import './styles/global.css';
 
 // Configure axios base URL for backend API
-axios.defaults.baseURL = 'https://chatpdf-7k6m.onrender.com/';
+axios.defaults.baseURL = 'https://chatpdf-7k6m.onrender.com';
 axios.defaults.timeout = 30000;
 
 function App() {
