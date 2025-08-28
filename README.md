@@ -75,13 +75,13 @@ This project demonstrates advanced skills in **full-stack development**, **AI in
 
 The platform follows a modern microservices architecture with clear separation of concerns:
 
-![System Architecture](https://raw.githubusercontent.com/yourusername/zerra-ai/main/docs/architecture-diagram.png)
+![System Architecture of ChatPDF](https://raw.githubusercontent.com/Ridh1234/ChatPDF/main/System%20architecture%20of%20chatpdf.png)
 
 ### 📊 Application Workflow
 
 Below is the complete system workflow showing how documents are processed and chat interactions are handled:
 
-![Application Workflow](https://raw.githubusercontent.com/yourusername/zerra-ai/main/docs/workflow-diagram.png)
+![Sequence Diagram](https://raw.githubusercontent.com/Ridh1234/ChatPDF/main/Sequence%20diagram.png)
 
 **Key Workflow Components:**
 
@@ -112,7 +112,7 @@ Below is the complete system workflow showing how documents are processed and ch
 
 Experience the modern, intuitive interface designed for professional document interaction:
 
-![ChatPDF Interface](https://raw.githubusercontent.com/yourusername/zerra-ai/main/docs/chatpdf-interface.png)
+![ChatPDF Interface](https://raw.githubusercontent.com/Ridh1234/ChatPDF/main/Chatpdf%20interface.png)
 
 **Interface Highlights:**
 - **Clean, Professional Design**: Modern SaaS-style interface with intuitive navigation
