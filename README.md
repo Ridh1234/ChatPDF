@@ -75,7 +75,7 @@ This project demonstrates advanced skills in **full-stack development**, **AI in
 
 The platform follows a modern microservices architecture with clear separation of concerns:
 
-![System Architecture of ChatPDF](https://raw.githubusercontent.com/Ridh1234/ChatPDF/main/System%20architecture%20of%20chatpdf.png)
+![System Architecture of ChatPDF](https://github.com/Ridh1234/ChatPDF/blob/main/System%20architecture%20of%20chatpdf%20(2).png)
 
 ### 📊 Application Workflow
 
