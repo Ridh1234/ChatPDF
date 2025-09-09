@@ -13,6 +13,7 @@ app = FastAPI(title="Zephyr PDF Extractor")
 
 # CORS configuration – allow frontend dev server
 origins = [
+    "*",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
