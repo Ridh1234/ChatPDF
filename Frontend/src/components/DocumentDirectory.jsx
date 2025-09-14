@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, FileText, Calendar, Trash2, Eye, MoreVertical, Layers, HardDrive } from 'lucide-react';
 import axios from 'axios';
+import { buildApiUrl } from '../config/api';
 import './DocumentDirectory.css';
 
 function DocumentDirectory() {
@@ -23,7 +24,7 @@ function DocumentDirectory() {
   const fetchDocuments = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/api/v1/documents');
+      const response = await axios.get(buildApiUrl('/api/v1/documents'));
       if (response.data.success) {
         setDocuments(response.data.documents);
         setStats(response.data.stats);
@@ -55,7 +56,7 @@ function DocumentDirectory() {
     }
 
     try {
-      const response = await axios.get(`/api/v1/search?query=${encodeURIComponent(searchQuery)}`);
+      const response = await axios.get(buildApiUrl(`/api/v1/search?query=${encodeURIComponent(searchQuery)}`));
       if (response.data.success) {
         setFilteredDocuments(response.data.documents);
       }
@@ -67,7 +68,7 @@ function DocumentDirectory() {
 
   const handleDeleteDocument = async (documentId) => {
     try {
-      const response = await axios.delete(`/api/v1/documents/${documentId}`);
+      const response = await axios.delete(buildApiUrl(`/api/v1/documents/${documentId}`));
       if (response.data.success) {
         setDocuments(prev => prev.filter(doc => doc.id !== documentId));
         setShowDeleteConfirm(null);

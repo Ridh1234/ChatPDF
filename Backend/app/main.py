@@ -4,11 +4,13 @@ from app.api import extract
 
 app = FastAPI(title="Inferra.ai - ChatPDF Platform")
 
-# CORS configuration – allow frontend dev server
+# CORS configuration – allow frontend dev server and production domains
 origins = [
     "*",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://your-vercel-app.vercel.app",  # Replace with your actual Vercel URL
+    "https://*.vercel.app",  # Allow all Vercel apps
 ]
 
 app.add_middleware(

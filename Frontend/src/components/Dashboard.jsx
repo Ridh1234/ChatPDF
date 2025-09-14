@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Send, FileText, Bot, User, Loader, ExternalLink } from 'lucide-react';
 import axios from 'axios';
+import { buildApiUrl } from '../config/api';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -54,7 +55,7 @@ function Dashboard() {
 
   const fetchRecentDocuments = async () => {
     try {
-      const response = await axios.get('/api/v1/documents');
+      const response = await axios.get(buildApiUrl('/api/v1/documents'));
       if (response.data.success) {
         setRecentDocuments(response.data.documents.slice(0, 5)); // Get last 5 documents
       }
@@ -79,7 +80,7 @@ function Dashboard() {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await axios.post('/api/v1/upload-pdf', formData, {
+      const response = await axios.post(buildApiUrl('/api/v1/upload-pdf'), formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -131,8 +132,8 @@ function Dashboard() {
   const loadDocument = async (documentId) => {
     try {
       const [docResponse, contentResponse] = await Promise.all([
-        axios.get(`/api/v1/documents/${documentId}`),
-        axios.get(`/api/v1/documents/${documentId}/content`)
+        axios.get(buildApiUrl(`/api/v1/documents/${documentId}`)),
+        axios.get(buildApiUrl(`/api/v1/documents/${documentId}/content`))
       ]);
 
       if (docResponse.data.success && contentResponse.data.success) {
@@ -142,7 +143,7 @@ function Dashboard() {
         setTotalPages(contentResponse.data.content.total_pages);
         
         // Set PDF URL for viewing
-        setPdfUrl(`/api/v1/documents/${documentId}/pdf`);
+        setPdfUrl(buildApiUrl(`/api/v1/documents/${documentId}/pdf`));
 
   // Restore existing chat history if present
   setMessages(prev => chatHistories[documentId] || prev);
@@ -186,7 +187,7 @@ function Dashboard() {
     setIsChatting(true);
 
     try {
-      const response = await axios.post('/api/v1/chat', {
+      const response = await axios.post(buildApiUrl('/api/v1/chat'), {
         question: userMessage.content,
         document_id: selectedDocument.id,
         context: messages.slice(-4) // Send last 4 messages as context
@@ -244,7 +245,7 @@ function Dashboard() {
     if (!selectedDocument) return;
     if (!window.confirm('Delete this document permanently?')) return;
     try {
-      await axios.delete(`/api/v1/documents/${selectedDocument.id}`);
+      await axios.delete(buildApiUrl(`/api/v1/documents/${selectedDocument.id}`));
       setSelectedDocument(null);
       setPdfUrl(null);
       setMessages([]);
