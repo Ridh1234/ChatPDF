@@ -1,0 +1,28 @@
+<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Inferra monogram">
+  <defs>
+    <linearGradient id="gradA" x1="4" y1="4" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="gradStroke" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#60A5FA" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#1D4ED8" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.35  0 0 0 0 0.60  0 0 0 0 1  0 0 0 0.9 0" result="colored"/>
+      <feBlend in="SourceGraphic" in2="colored" mode="screen"/>
+    </filter>
+    <clipPath id="clipRounded">
+      <rect x="4" y="4" width="36" height="36" rx="11" />
+    </clipPath>
+  </defs>
+  <rect x="4" y="4" width="36" height="36" rx="11" fill="url(#gradA)" stroke="url(#gradStroke)" stroke-width="1.2" />
+  <!-- Stylized I -->
+  <g filter="url(#glow)" clip-path="url(#clipRounded)">
+    <path d="M22 11.2c1.55 0 2.8-1.25 2.8-2.8 0-1.55-1.25-2.8-2.8-2.8s-2.8 1.25-2.8 2.8c0 1.55 1.25 2.8 2.8 2.8Zm-4.9 3.3c-.61 0-1.1.49-1.1 1.1v1.05c0 .61.49 1.1 1.1 1.1h1.55v11.5h-1.55c-.61 0-1.1.49-1.1 1.1v1.05c0 .61.49 1.1 1.1 1.1h9.8c.61 0 1.1-.49 1.1-1.1v-1.05c0-.61-.49-1.1-1.1-1.1h-1.55V17.75h1.55c.61 0 1.1-.49 1.1-1.1v-1.05c0-.61-.49-1.1-1.1-1.1h-9.8Z" fill="#FFFFFF" fill-opacity="0.94"/>
+    <path d="M20.55 17.75h2.9v11.5h-2.9z" fill="#93C5FD" fill-opacity="0.9"/>
+  </g>
+  <!-- Accent diagonal highlight -->
+  <path d="M10 34.5 34.4 10.1" stroke="rgba(255,255,255,0.08)" stroke-width="3" stroke-linecap="round"/>
+</svg>
