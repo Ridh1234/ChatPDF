@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://chat-pdf-green.vercel.app/',
+        target: 'https://chatpdf-7k6m.onrender.com',
         changeOrigin: true,
       },
     },
