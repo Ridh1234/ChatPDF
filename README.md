@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![Zerra.ai Logo](./assets/logo.svg)
 
 **Transform your PDFs into interactive conversations with AI**
 
