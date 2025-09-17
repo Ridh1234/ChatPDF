@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Moon, Sun, LayoutDashboard, Files } from 'lucide-react';
+import { Moon, Sun, LayoutDashboard, Files, Menu, X } from 'lucide-react';
 import Dashboard from './components/Dashboard';
 import DocumentDirectory from './components/DocumentDirectory';
 import './App.css';
@@ -8,6 +8,7 @@ import logoSvg from './assets/logo.svg';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -32,17 +33,64 @@ function App() {
     }
   };
 
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Close mobile menu when navigating
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.sidebar') && !event.target.closest('.mobile-menu-btn')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+
+    // Cleanup on unmount
+    return () => document.body.classList.remove('no-scroll');
+  }, [isMobileMenuOpen]);
+
   return (
     <div className={`app ${darkMode ? 'dark' : ''}`}>
       <div className="app-container">
+        {/* Mobile Menu Button */}
+        <button 
+          className="mobile-menu-btn"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Overlay */}
+        {isMobileMenuOpen && <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
+
         {/* Sidebar */}
-        <aside className="sidebar fixed">
+        <aside className={`sidebar ${isMobileMenuOpen ? 'sidebar-open' : ''}`}>
           <div className="sidebar-header">
             <div className="logo">
               <div className="logo-icon pro">
-                <img src={logoSvg} alt="Inferra.ai" className="logo-img" />
+                <img src={logoSvg} alt="Zerra.ai" className="logo-img" />
               </div>
-              <h1>Inferra.ai</h1>
+              <h1>Zerra.ai</h1>
             </div>
           </div>
 
@@ -51,7 +99,7 @@ function App() {
               <li>
                 <button 
                   className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}
-                  onClick={() => navigate('/')}
+                  onClick={() => handleNavigation('/')}
                 >
                   <LayoutDashboard size={18} />
                   <span className="nav-text">Dashboard</span>
@@ -60,7 +108,7 @@ function App() {
               <li>
                 <button 
                   className={`nav-item ${location.pathname === '/documents' ? 'active' : ''}`}
-                  onClick={() => navigate('/documents')}
+                  onClick={() => handleNavigation('/documents')}
                 >
                   <Files size={18} />
                   <span className="nav-text">Documents</span>
